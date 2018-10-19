@@ -10,7 +10,7 @@
   
   <title>
     
-      从尾到头打印链表 | nirrow’s blog
+      用两个栈实现队列 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>从尾到头打印链表</h2>
-  <p class="post-date">2018-10-18</p>
+  <h2>用两个栈实现队列</h2>
+  <p class="post-date">2018-10-19</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,8 +147,9 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line">*    public class ListNode &#123; </span><br><span class="line">*        int val; </span><br><span class="line">*        ListNode next = null; </span><br><span class="line">* </span><br><span class="line">*        ListNode(int val) &#123; </span><br><span class="line">*            this.val = val; </span><br><span class="line">*        &#125; </span><br><span class="line">*    &#125; </span><br><span class="line">* </span><br><span class="line">*/ </span><br><span class="line">import java.util.ArrayList; </span><br><span class="line">import java.util.Stack; </span><br><span class="line">public class Solution &#123; </span><br><span class="line">    public ArrayList&lt;Integer&gt; printListFromTailToHead(ListNode listNode) &#123; </span><br><span class="line">        Stack&lt;ListNode&gt; stack = new Stack(); </span><br><span class="line">        while(null != listNode)&#123; </span><br><span class="line">            stack.push(listNode); </span><br><span class="line">            listNode = listNode.next; </span><br><span class="line">        &#125; </span><br><span class="line">        ArrayList&lt;Integer&gt; array = new ArrayList(stack.size()); </span><br><span class="line">        while(!stack.isEmpty())&#123; </span><br><span class="line">            array.add(Integer.valueOf(stack.pop().val)); </span><br><span class="line">        &#125; </span><br><span class="line">        return array; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><p>用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    Stack&lt;Integer&gt; stackPush = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">    Stack&lt;Integer&gt; stackPop = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> node)</span> </span>&#123;</span><br><span class="line">        stackPush.push(node);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (stackPop.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(!stackPush.isEmpty())&#123;</span><br><span class="line">                stackPop.push(stackPush.pop());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stackPop.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -174,20 +175,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/10/18/替换空格/">
+      <a class="nav-left" href="/2018/10/18/从尾到头打印链表/">
         <span class="nav-arrow">← </span>
         
-          替换空格
+          从尾到头打印链表
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/10/19/用两个栈实现队列/">
-        
-          用两个栈实现队列
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -241,7 +235,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/10/18/从尾到头打印链表/';
+    var url = 'http://yoursite.com/2018/10/19/用两个栈实现队列/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -297,7 +291,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "从尾到头打印链表",
+        id: "用两个栈实现队列",
         owner: "",
         repo: "",
         oauth: {
@@ -325,7 +319,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/10/18/从尾到头打印链表/';
+  var disqus_url = 'http://yoursite.com/2018/10/19/用两个栈实现队列/';
   
   (function(){
     var dsq = document.createElement('script');
