@@ -10,7 +10,7 @@
   
   <title>
     
-      从尾到头打印链表 | nirrow’s blog
+      nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>从尾到头打印链表</h2>
-  <p class="post-date">2018-10-18</p>
+  <h2></h2>
+  <p class="post-date">2018-10-23</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,30 +147,12 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line">*    public class ListNode &#123; </span><br><span class="line">*        int val; </span><br><span class="line">*        ListNode next = null; </span><br><span class="line">* </span><br><span class="line">*        ListNode(int val) &#123; </span><br><span class="line">*            this.val = val; </span><br><span class="line">*        &#125; </span><br><span class="line">*    &#125; </span><br><span class="line">* </span><br><span class="line">*/ </span><br><span class="line">import java.util.ArrayList; </span><br><span class="line">import java.util.Stack; </span><br><span class="line">public class Solution &#123; </span><br><span class="line">    public ArrayList&lt;Integer&gt; printListFromTailToHead(ListNode listNode) &#123; </span><br><span class="line">        Stack&lt;ListNode&gt; stack = new Stack(); </span><br><span class="line">        while(null != listNode)&#123; </span><br><span class="line">            stack.push(listNode); </span><br><span class="line">            listNode = listNode.next; </span><br><span class="line">        &#125; </span><br><span class="line">        ArrayList&lt;Integer&gt; array = new ArrayList(stack.size()); </span><br><span class="line">        while(!stack.isEmpty())&#123; </span><br><span class="line">            array.add(Integer.valueOf(stack.pop().val)); </span><br><span class="line">        &#125; </span><br><span class="line">        return array; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><hr>
+<p>title: 旋转数组的最小数字<br>date: 2018-10-23 14:13:09</p>
+<h2 id="tags-算法-面试-剑指offer-查找-有序"><a href="#tags-算法-面试-剑指offer-查找-有序" class="headerlink" title="tags: [算法,面试,剑指offer,查找,有序] "></a>tags: [算法,面试,剑指offer,查找,有序] </h2><p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 非减排序，即后面的元素不必前面的元素小，也即后面的元素大于等于前面的元素。</span><br><span class="line"> * 这样的序列经过旋转，最多出现一次降序。</span><br><span class="line"> **/</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public int minNumberInRotateArray(int [] array) &#123;</span><br><span class="line">        int length = array.length;</span><br><span class="line">        if (0 == length) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else if (1 == length) &#123;</span><br><span class="line">            return array[0];</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int start = array[0];</span><br><span class="line">            for (int i = 1; i &lt; length; i++) &#123;</span><br><span class="line">                if (array[i] &lt; start) &#123;</span><br><span class="line">                    return array[i];</span><br><span class="line">                &#125;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            return start;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</section>
     <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#算法" >
-    <span class="tag-code">算法</span>
-  </a>
-
-  <a href="/tags#面试" >
-    <span class="tag-code">面试</span>
-  </a>
-
-  <a href="/tags#剑指offer" >
-    <span class="tag-code">剑指offer</span>
-  </a>
-
-  <a href="/tags#遍历" >
-    <span class="tag-code">遍历</span>
-  </a>
-
-      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -178,20 +160,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/10/18/替换空格/">
+      <a class="nav-left" href="/2018/10/19/用两个栈实现队列/">
         <span class="nav-arrow">← </span>
-        
-          替换空格
-        
-      </a>
-    
-    
-      <a class="nav-right" href="/2018/10/19/用两个栈实现队列/">
         
           用两个栈实现队列
         
-        <span class="nav-arrow"> →</span>
       </a>
+    
     
   </div>
 
@@ -235,7 +210,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tags-算法-面试-剑指offer-查找-有序"><span class="toc-nav-text">tags: [算法,面试,剑指offer,查找,有序] </span></a></li></ol>
     
   </div>
 </aside>
@@ -245,7 +220,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/10/18/从尾到头打印链表/';
+    var url = 'http://yoursite.com/2018/10/23/旋转数组的最小数字/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +276,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "从尾到头打印链表",
+        id: "",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +304,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/10/18/从尾到头打印链表/';
+  var disqus_url = 'http://yoursite.com/2018/10/23/旋转数组的最小数字/';
   
   (function(){
     var dsq = document.createElement('script');
