@@ -10,7 +10,7 @@
   
   <title>
     
-      调整数组顺序使奇数位于偶数前面 | nirrow’s blog
+      链表中倒数第k个节点 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>调整数组顺序使奇数位于偶数前面</h2>
+  <h2>链表中倒数第k个节点</h2>
   <p class="post-date">2018-10-26</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -147,9 +147,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public void reOrderArray(int [] array) &#123;</span><br><span class="line">        int length = array.length;</span><br><span class="line">        for (int i = 0; i &lt; length; i++) &#123;             //顺序遍历；</span><br><span class="line">            if (1 == (array[i] &amp; 1)) &#123;                 //遇到奇数，跳过；</span><br><span class="line">                continue;</span><br><span class="line">            &#125; else &#123;                                   //遇到偶数；</span><br><span class="line">                for (int j = i + 1; j &lt; length; j++) &#123; //从当前位置(i)的下一个位置(i+1)开始，顺序找奇数；</span><br><span class="line">                    if ( 1 == (array[j] &amp; 1)) &#123;        //找到奇数；</span><br><span class="line">                        int tmp = array[j];            //缓存下来；</span><br><span class="line">                        for (int k = j; k &gt; i; k--) &#123;  //偶数依次往后移动一个位置;</span><br><span class="line">                            array[k] = array[k-1];</span><br><span class="line">                        &#125;</span><br><span class="line">                        array[i] = tmp;                //奇数放到当前位置(i)。</span><br><span class="line">                        break;                         //一次交换完成，跳出寻找奇数的循环。</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</section>
+    <section class="markdown-content"><p>输入一个链表，输出该链表中倒数第k个结点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">public class ListNode &#123;</span><br><span class="line">    int val;</span><br><span class="line">    ListNode next = null;</span><br><span class="line"></span><br><span class="line">    ListNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*/</span><br><span class="line">import java.util.Stack;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode FindKthToTail(ListNode head,int k) &#123;</span><br><span class="line">        if (k &lt; 0) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;ListNode&gt; stack = new Stack();</span><br><span class="line">        ListNode point = head;</span><br><span class="line">        while (null != point)&#123;</span><br><span class="line">            stack.push(point);</span><br><span class="line">            point = point.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if (k &gt; stack.size())&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        while(0 != k--)&#123;</span><br><span class="line">            point = stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return point;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -167,8 +166,12 @@
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#排序" >
-    <span class="tag-code">排序</span>
+  <a href="/tags#查找" >
+    <span class="tag-code">查找</span>
+  </a>
+
+  <a href="/tags#链表" >
+    <span class="tag-code">链表</span>
   </a>
 
       </div>
@@ -179,20 +182,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/10/25/数值的整数次方/">
+      <a class="nav-left" href="/2018/10/26/调整数组顺序使奇数位于偶数前面/">
         <span class="nav-arrow">← </span>
         
-          数值的整数次方
+          调整数组顺序使奇数位于偶数前面
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/10/26/链表中倒数第k个节点/">
-        
-          链表中倒数第k个节点
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -246,7 +242,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/10/26/调整数组顺序使奇数位于偶数前面/';
+    var url = 'http://yoursite.com/2018/10/26/链表中倒数第k个节点/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -302,7 +298,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "调整数组顺序使奇数位于偶数前面",
+        id: "链表中倒数第k个节点",
         owner: "",
         repo: "",
         oauth: {
@@ -330,7 +326,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/10/26/调整数组顺序使奇数位于偶数前面/';
+  var disqus_url = 'http://yoursite.com/2018/10/26/链表中倒数第k个节点/';
   
   (function(){
     var dsq = document.createElement('script');
