@@ -10,7 +10,7 @@
   
   <title>
     
-      nirrow’s blog
+      斐波那契数列 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 </header>
 
     <div id="article-banner">
-  <h2></h2>
+  <h2>斐波那契数列</h2>
   <p class="post-date">2018-10-23</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -147,12 +147,39 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><hr>
-<p>title: 斐波那契数列<br>date: 2018-10-23 15:36:40</p>
-<h2 id="tags-算法-面试-剑指offer-斐波那契数列-青蛙-跳台阶"><a href="#tags-算法-面试-剑指offer-斐波那契数列-青蛙-跳台阶" class="headerlink" title="tags: [算法,面试,剑指offer,斐波那契数列,青蛙,跳台阶]  "></a>tags: [算法,面试,剑指offer,斐波那契数列,青蛙,跳台阶]  </h2><p>大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0）。<br>n&lt;=39  </p>
+    <section class="markdown-content"><p>大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0）。<br>n&lt;=39  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *最直观的解法应该是迭代，但是迭代有重复计算的问题，效率可能会比较低，所以没有采用。</span><br><span class="line"> **/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public int Fibonacci(int n) &#123;</span><br><span class="line">        if (n &gt; 39) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if(n == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else if (n == 1) &#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int fn_1 = 1;  //f(n-1)</span><br><span class="line">            int fn_2 = 0;  //f(n-2)</span><br><span class="line">            int fn = 0;    //f(n)</span><br><span class="line">            for (int i = 2; i &lt;= n; i++) &#123;</span><br><span class="line">                fn = fn_1 + fn_2;</span><br><span class="line">                fn_2 = fn_1;</span><br><span class="line">                fn_1 = fn;</span><br><span class="line">            &#125;</span><br><span class="line">            return fn;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。  </span><br><span class="line"></span><br><span class="line">```[java]</span><br><span class="line">/**</span><br><span class="line"> * 逆推，青蛙要跳到n级台阶，最后一跳有两种情况，从第n-1级台阶跳1级跳上来或者从n-2级台阶跳2级跳上来。</span><br><span class="line"> * 所以f(n) = f(n-1)+f(n-2)，其实只不过是斐波那契的变相描述罢了，本质还是斐波那契数列。</span><br><span class="line"> **/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public int JumpFloor(int target) &#123;</span><br><span class="line">        if (target == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;else if (target == 1) &#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;else if (target == 2)&#123;</span><br><span class="line">            return 2;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            int fn_1 = 2;</span><br><span class="line">            int fn_2 = 1;</span><br><span class="line">            int fn = 0; </span><br><span class="line">            for (int i = 3; i &lt;= target; i++) &#123;</span><br><span class="line">                fn = fn_1 + fn_2;</span><br><span class="line">                fn_2 = fn_1;</span><br><span class="line">                fn_1 = fn;</span><br><span class="line">            &#125;</span><br><span class="line">            return fn;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </section>
     <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#算法" >
+    <span class="tag-code">算法</span>
+  </a>
+
+  <a href="/tags#面试" >
+    <span class="tag-code">面试</span>
+  </a>
+
+  <a href="/tags#剑指offer" >
+    <span class="tag-code">剑指offer</span>
+  </a>
+
+  <a href="/tags#斐波那契数列" >
+    <span class="tag-code">斐波那契数列</span>
+  </a>
+
+  <a href="/tags#青蛙" >
+    <span class="tag-code">青蛙</span>
+  </a>
+
+  <a href="/tags#跳台阶" >
+    <span class="tag-code">跳台阶</span>
+  </a>
+
+      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -170,7 +197,7 @@
     
       <a class="nav-right" href="/2018/10/25/二进制中1的个数/">
         
-          (untitled)
+          二进制中1的个数
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -217,7 +244,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tags-算法-面试-剑指offer-斐波那契数列-青蛙-跳台阶"><span class="toc-nav-text">tags: [算法,面试,剑指offer,斐波那契数列,青蛙,跳台阶]  </span></a></li></ol>
+      <ol class="nav">none</ol>
     
   </div>
 </aside>
@@ -283,7 +310,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "",
+        id: "斐波那契数列",
         owner: "",
         repo: "",
         oauth: {
