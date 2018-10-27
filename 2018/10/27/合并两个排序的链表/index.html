@@ -10,7 +10,7 @@
   
   <title>
     
-      反转链表 | nirrow’s blog
+      合并两个排序的链表 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>反转链表</h2>
+  <h2>合并两个排序的链表</h2>
   <p class="post-date">2018-10-27</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -147,8 +147,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一个链表，反转链表后，输出新链表的表头。</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">public class ListNode &#123;</span><br><span class="line">    int val;</span><br><span class="line">    ListNode next = null;</span><br><span class="line"></span><br><span class="line">    ListNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode ReverseList(ListNode head) &#123;</span><br><span class="line">        if (null == head || null == head.next) &#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode prev = null;</span><br><span class="line">        ListNode next = null;</span><br><span class="line">        while (null != head) &#123;</span><br><span class="line">            next = head.next;</span><br><span class="line">            head.next = prev;</span><br><span class="line">            prev = head;</span><br><span class="line">            head = next;</span><br><span class="line">        &#125;</span><br><span class="line">        return prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">public class ListNode &#123;</span><br><span class="line">    int val;</span><br><span class="line">    ListNode next = null;</span><br><span class="line"></span><br><span class="line">    ListNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode Merge(ListNode list1,ListNode list2) &#123;</span><br><span class="line">        if (null == list1)&#123;</span><br><span class="line">            return list2;</span><br><span class="line">        &#125; else if (null == list2) &#123;</span><br><span class="line">            return list1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            ListNode mergeHead,mergeTail;</span><br><span class="line">            //初始化，选择val最小的节点作为head。</span><br><span class="line">            if (list1.val &gt; list2.val)&#123;</span><br><span class="line">                mergeHead = list2;</span><br><span class="line">                list2 = list2.next;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                mergeHead = list1;</span><br><span class="line">                list1 = list1.next;</span><br><span class="line">            &#125;</span><br><span class="line">            mergeTail = mergeHead;</span><br><span class="line">            //循环遍历，将节点按从小到大的顺序依次添加到mergeList中去。</span><br><span class="line">            while (null != list1 &amp;&amp; null != list2)&#123;</span><br><span class="line">                if (list1.val &gt; list2.val)&#123;</span><br><span class="line">                    mergeTail.next = list2;</span><br><span class="line">                    list2 = list2.next;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    mergeTail.next = list1;</span><br><span class="line">                    list1 = list1.next;</span><br><span class="line">                &#125;</span><br><span class="line">                mergeTail = mergeTail.next;</span><br><span class="line">            &#125;</span><br><span class="line">            //扫尾，是否最后有一条链表已经全部merge，导致另一条无法比较的。有则将另一条放到队尾。</span><br><span class="line">            if (null != list1)&#123;</span><br><span class="line">                mergeTail.next = list1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                mergeTail.next = list2;</span><br><span class="line">            &#125;</span><br><span class="line">            return mergeHead;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -166,8 +166,20 @@
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#链表，反转" >
-    <span class="tag-code">链表，反转</span>
+  <a href="/tags#链表" >
+    <span class="tag-code">链表</span>
+  </a>
+
+  <a href="/tags#排序" >
+    <span class="tag-code">排序</span>
+  </a>
+
+  <a href="/tags#合并" >
+    <span class="tag-code">合并</span>
+  </a>
+
+  <a href="/tags#merge" >
+    <span class="tag-code">merge</span>
   </a>
 
       </div>
@@ -178,20 +190,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/10/26/链表中倒数第k个节点/">
+      <a class="nav-left" href="/2018/10/27/反转链表/">
         <span class="nav-arrow">← </span>
         
-          链表中倒数第k个节点
+          反转链表
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/10/27/合并两个排序的链表/">
-        
-          合并两个排序的链表
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -245,7 +250,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/10/27/反转链表/';
+    var url = 'http://yoursite.com/2018/10/27/合并两个排序的链表/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +306,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "反转链表",
+        id: "合并两个排序的链表",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +334,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/10/27/反转链表/';
+  var disqus_url = 'http://yoursite.com/2018/10/27/合并两个排序的链表/';
   
   (function(){
     var dsq = document.createElement('script');
