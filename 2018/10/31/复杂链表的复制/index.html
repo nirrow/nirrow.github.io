@@ -10,7 +10,7 @@
   
   <title>
     
-      顺时针打印矩阵 | nirrow’s blog
+      复杂链表的复制 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>顺时针打印矩阵</h2>
-  <p class="post-date">2018-10-29</p>
+  <h2>复杂链表的复制</h2>
+  <p class="post-date">2018-10-31</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,27 +147,27 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    private class Bounds&#123;</span><br><span class="line">        int left, top, right, bottom;</span><br><span class="line">    &#125;</span><br><span class="line">    public ArrayList&lt;Integer&gt; printMatrix(int [][] matrix) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; result = new ArrayList();</span><br><span class="line">        if (null == matrix || matrix.length == 0) &#123;</span><br><span class="line">            return result;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //init</span><br><span class="line">            Bounds bounds = new Bounds();</span><br><span class="line">            bounds.left = bounds.top = 0;</span><br><span class="line">            bounds.bottom = matrix.length - 1;</span><br><span class="line">            bounds.right = matrix[0].length - 1;</span><br><span class="line">            while (bounds.left &lt;= bounds.right || bounds.top &lt;= bounds.bottom) &#123;</span><br><span class="line">                if(visitTop(matrix, bounds, result)) break;</span><br><span class="line">                if (visitRight(matrix, bounds, result)) break;</span><br><span class="line">                if (visitBottom(matrix, bounds, result)) break;</span><br><span class="line">                if (visitLeft(matrix, bounds, result)) break;</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 按顺序定义顺时针访问的四个方法</span><br><span class="line">     **/</span><br><span class="line">    private boolean visitTop(int [][] matrix, Bounds bounds, ArrayList&lt;Integer&gt; result) &#123;</span><br><span class="line">        for (int i = bounds.left; i &lt;= bounds.right; i++) &#123;</span><br><span class="line">            result.add(new Integer(matrix[bounds.top][i]));</span><br><span class="line">        &#125;</span><br><span class="line">        bounds.top++;</span><br><span class="line">        return bounds.top &gt; bounds.bottom;</span><br><span class="line">    &#125;</span><br><span class="line">    private boolean visitRight(int [][] matrix, Bounds bounds, ArrayList&lt;Integer&gt; result) &#123;</span><br><span class="line">        for (int i = bounds.top; i &lt;= bounds.bottom; i++) &#123;</span><br><span class="line">            result.add(new Integer(matrix[i][bounds.right]));</span><br><span class="line">        &#125;</span><br><span class="line">        bounds.right--;</span><br><span class="line">        return bounds.left &gt; bounds.right;</span><br><span class="line">    &#125;</span><br><span class="line">    private boolean visitBottom(int [][] matrix, Bounds bounds, ArrayList&lt;Integer&gt; result) &#123;</span><br><span class="line">        for (int i = bounds.right; i &gt;= bounds.left; i--) &#123;</span><br><span class="line">            result.add(new Integer(matrix[bounds.bottom][i]));</span><br><span class="line">        &#125;</span><br><span class="line">        bounds.bottom--;</span><br><span class="line">        return bounds.top &gt; bounds.bottom;</span><br><span class="line">    &#125;</span><br><span class="line">    private boolean visitLeft(int [][] matrix, Bounds bounds, ArrayList&lt;Integer&gt; result) &#123;</span><br><span class="line">        for (int i = bounds.bottom; i &gt;= bounds.top; i--) &#123;</span><br><span class="line">            result.add(new Integer(matrix[i][bounds.left]));</span><br><span class="line">        &#125;</span><br><span class="line">        bounds.left++;</span><br><span class="line">        return bounds.left &gt; bounds.right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">public class RandomListNode &#123;</span><br><span class="line">    int label;</span><br><span class="line">    RandomListNode next = null;</span><br><span class="line">    RandomListNode random = null;</span><br><span class="line"></span><br><span class="line">    RandomListNode(int label) &#123;</span><br><span class="line">        this.label = label;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public RandomListNode Clone(RandomListNode pHead) &#123;</span><br><span class="line">        if (null == pHead) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        ArrayList&lt;RandomListNode&gt; randomNodes = new ArrayList&lt;&gt;();</span><br><span class="line">        RandomListNode cloneHead = new RandomListNode(pHead.label);</span><br><span class="line">        if (null != pHead.random) &#123;</span><br><span class="line">            RandomListNode random = new RandomListNode(pHead.random.label);</span><br><span class="line">            randomNodes.add(random);</span><br><span class="line">            cloneHead.random = random;</span><br><span class="line">        &#125;</span><br><span class="line">        RandomListNode prev = cloneHead;</span><br><span class="line">        while(null != pHead.next) &#123;</span><br><span class="line">            pHead = pHead.next;</span><br><span class="line">            RandomListNode random = null;</span><br><span class="line">            if (null != pHead.random) &#123;</span><br><span class="line">                random = new RandomListNode(pHead.random.label);</span><br><span class="line">                randomNodes.add(random);</span><br><span class="line">            &#125;</span><br><span class="line">            RandomListNode curNode = findInRandomList(randomNodes, pHead);</span><br><span class="line">            if (null == curNode) &#123;</span><br><span class="line">                curNode = new RandomListNode(pHead.label);</span><br><span class="line">            &#125;</span><br><span class="line">            prev.next = curNode;</span><br><span class="line">            curNode.random = random;</span><br><span class="line">            prev = curNode;</span><br><span class="line">        &#125;</span><br><span class="line">        return cloneHead;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private RandomListNode findInRandomList(ArrayList&lt;RandomListNode&gt; randomNodes, RandomListNode node) &#123;</span><br><span class="line">        RandomListNode result = null;</span><br><span class="line">        for (RandomListNode n : randomNodes) &#123;</span><br><span class="line">            if (n.label == node.label) &#123;</span><br><span class="line">                result = n;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (null != result) &#123;</span><br><span class="line">            randomNodes.remove(result);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#算法" >
-    <span class="tag-code">算法</span>
-  </a>
-
-  <a href="/tags#面试" >
-    <span class="tag-code">面试</span>
-  </a>
-
   <a href="/tags#剑指offer" >
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#遍历，二维数组" >
-    <span class="tag-code">遍历，二维数组</span>
+  <a href="/tags#链表" >
+    <span class="tag-code">链表</span>
+  </a>
+
+  <a href="/tags#刷题" >
+    <span class="tag-code">刷题</span>
+  </a>
+
+  <a href="/tags#笔试" >
+    <span class="tag-code">笔试</span>
   </a>
 
       </div>
@@ -178,20 +178,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/10/27/树的子结构/">
+      <a class="nav-left" href="/2018/10/29/顺时针打印矩阵/">
         <span class="nav-arrow">← </span>
         
-          树的子结构
+          顺时针打印矩阵
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/10/31/复杂链表的复制/">
-        
-          复杂链表的复制
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -245,7 +238,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/10/29/顺时针打印矩阵/';
+    var url = 'http://yoursite.com/2018/10/31/复杂链表的复制/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +294,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "顺时针打印矩阵",
+        id: "复杂链表的复制",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +322,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/10/29/顺时针打印矩阵/';
+  var disqus_url = 'http://yoursite.com/2018/10/31/复杂链表的复制/';
   
   (function(){
     var dsq = document.createElement('script');
