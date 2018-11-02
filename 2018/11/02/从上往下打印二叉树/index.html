@@ -10,7 +10,7 @@
   
   <title>
     
-      栈的压入、弹出序列 | nirrow’s blog
+      从上往下打印二叉树 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>栈的压入、弹出序列</h2>
+  <h2>从上往下打印二叉树</h2>
   <p class="post-date">2018-11-02</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -147,8 +147,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4,5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Stack;</span><br><span class="line"></span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public boolean IsPopOrder(int [] pushA,int [] popA) &#123;</span><br><span class="line">      if (null == pushA || null == popA) &#123;</span><br><span class="line">          return false;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          int length = pushA.length;</span><br><span class="line">          Stack&lt;Integer&gt; stack = new Stack();</span><br><span class="line">          int popIndex = 0;</span><br><span class="line">          for (int i = 0; i &lt; length; i++) &#123;</span><br><span class="line">              stack.push(pushA[i]);</span><br><span class="line">              while(!stack.isEmpty())&#123;</span><br><span class="line">                  if (stack.peek() == popA[popIndex])&#123;</span><br><span class="line">                      stack.pop();</span><br><span class="line">                      popIndex++;</span><br><span class="line">                  &#125;else&#123;</span><br><span class="line">                      break;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          return length == popIndex;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">/**</span><br><span class="line">public class TreeNode &#123;</span><br><span class="line">    int val = 0;</span><br><span class="line">    TreeNode left = null;</span><br><span class="line">    TreeNode right = null;</span><br><span class="line"></span><br><span class="line">    public TreeNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ArrayList&lt;Integer&gt; PrintFromTopToBottom(TreeNode root) &#123;</span><br><span class="line">        ArrayList&lt;TreeNode&gt; queue = new ArrayList();</span><br><span class="line">        ArrayList&lt;Integer&gt; arrayList = new ArrayList();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        while(!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode node = queue.remove(0);</span><br><span class="line">            if (null != node) &#123;</span><br><span class="line">                arrayList.add(node.val);</span><br><span class="line">                if (null != node.left)&#123;</span><br><span class="line">                    queue.add(node.left);</span><br><span class="line">                &#125;</span><br><span class="line">                if (null != node.right)&#123;</span><br><span class="line">                    queue.add(node.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return arrayList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -166,8 +166,12 @@
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#栈" >
-    <span class="tag-code">栈</span>
+  <a href="/tags#遍历" >
+    <span class="tag-code">遍历</span>
+  </a>
+
+  <a href="/tags#二叉树" >
+    <span class="tag-code">二叉树</span>
   </a>
 
       </div>
@@ -178,20 +182,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/11/02/包含min函数的栈/">
+      <a class="nav-left" href="/2018/11/02/栈的压入、弹出序列/">
         <span class="nav-arrow">← </span>
         
-          包含min函数的栈
+          栈的压入、弹出序列
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/11/02/从上往下打印二叉树/">
-        
-          从上往下打印二叉树
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -245,7 +242,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/11/02/栈的压入、弹出序列/';
+    var url = 'http://yoursite.com/2018/11/02/从上往下打印二叉树/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +298,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "栈的压入、弹出序列",
+        id: "从上往下打印二叉树",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +326,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/11/02/栈的压入、弹出序列/';
+  var disqus_url = 'http://yoursite.com/2018/11/02/从上往下打印二叉树/';
   
   (function(){
     var dsq = document.createElement('script');
