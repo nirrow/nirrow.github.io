@@ -10,7 +10,7 @@
   
   <title>
     
-      从上往下打印二叉树 | nirrow’s blog
+      数组中出现次数超过一半的数字 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>从上往下打印二叉树</h2>
-  <p class="post-date">2018-11-02</p>
+  <h2>数组中出现次数超过一半的数字</h2>
+  <p class="post-date">2018-11-12</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,8 +147,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">/**</span><br><span class="line">public class TreeNode &#123;</span><br><span class="line">    int val = 0;</span><br><span class="line">    TreeNode left = null;</span><br><span class="line">    TreeNode right = null;</span><br><span class="line"></span><br><span class="line">    public TreeNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ArrayList&lt;Integer&gt; PrintFromTopToBottom(TreeNode root) &#123;</span><br><span class="line">        ArrayList&lt;TreeNode&gt; queue = new ArrayList();</span><br><span class="line">        ArrayList&lt;Integer&gt; arrayList = new ArrayList();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        while(!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode node = queue.remove(0);</span><br><span class="line">            if (null != node) &#123;</span><br><span class="line">                arrayList.add(node.val);</span><br><span class="line">                if (null != node.left)&#123;</span><br><span class="line">                    queue.add(node.left);</span><br><span class="line">                &#125;</span><br><span class="line">                if (null != node.right)&#123;</span><br><span class="line">                    queue.add(node.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return arrayList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int MoreThanHalfNum_Solution(int [] array) &#123;</span><br><span class="line">        int length = array.length;</span><br><span class="line">        if (0 == length)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int num = array[0];</span><br><span class="line">            int count = 1;</span><br><span class="line">            for (int i = 1; i &lt; length; i++)&#123;</span><br><span class="line">                if (num == array[i])&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    count--;</span><br><span class="line">                    if (0 == count) &#123;</span><br><span class="line">                        num = array[i];</span><br><span class="line">                        count = 1;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            count = 0;</span><br><span class="line">            for (int i = 0; i &lt; length; i++)&#123;</span><br><span class="line">                if (array[i] == num) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (count * 2 &gt; length)&#123;</span><br><span class="line">                return num;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -166,12 +166,12 @@
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#遍历" >
-    <span class="tag-code">遍历</span>
+  <a href="/tags#查找" >
+    <span class="tag-code">查找</span>
   </a>
 
-  <a href="/tags#二叉树" >
-    <span class="tag-code">二叉树</span>
+  <a href="/tags#打擂算法" >
+    <span class="tag-code">打擂算法</span>
   </a>
 
       </div>
@@ -182,20 +182,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/11/02/栈的压入、弹出序列/">
+      <a class="nav-left" href="/2018/11/02/从上往下打印二叉树/">
         <span class="nav-arrow">← </span>
         
-          栈的压入、弹出序列
+          从上往下打印二叉树
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/11/12/数组中出现次数超过一半的数字/">
-        
-          数组中出现次数超过一半的数字
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -249,7 +242,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/11/02/从上往下打印二叉树/';
+    var url = 'http://yoursite.com/2018/11/12/数组中出现次数超过一半的数字/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -305,7 +298,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "从上往下打印二叉树",
+        id: "数组中出现次数超过一半的数字",
         owner: "",
         repo: "",
         oauth: {
@@ -333,7 +326,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/11/02/从上往下打印二叉树/';
+  var disqus_url = 'http://yoursite.com/2018/11/12/数组中出现次数超过一半的数字/';
   
   (function(){
     var dsq = document.createElement('script');
