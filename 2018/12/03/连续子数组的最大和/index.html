@@ -10,7 +10,7 @@
   
   <title>
     
-      二叉树中和为某一值的路径 | nirrow’s blog
+      连续子数组的最大和 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>二叉树中和为某一值的路径</h2>
-  <p class="post-date">2018-11-24</p>
+  <h2>连续子数组的最大和</h2>
+  <p class="post-date">2018-12-03</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,27 +147,39 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一颗二叉树的跟节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。(注意: 在返回值的list中，数组长度大的数组靠前)</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">/**</span><br><span class="line">public class TreeNode &#123;</span><br><span class="line">    int val = 0;</span><br><span class="line">    TreeNode left = null;</span><br><span class="line">    TreeNode right = null;</span><br><span class="line"></span><br><span class="line">    public TreeNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; FindPath(TreeNode root,int target) &#123;</span><br><span class="line">        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; result = new ArrayList();</span><br><span class="line">        ArrayList&lt;Integer&gt; route = new ArrayList();</span><br><span class="line">        findPath(root, target, route, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private void findPath(TreeNode root,int target, ArrayList&lt;Integer&gt; route, ArrayList&lt;ArrayList&lt;Integer&gt;&gt; result)&#123;</span><br><span class="line">        if (null == root) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            ArrayList&lt;Integer&gt; newRoute = new ArrayList(route);</span><br><span class="line">            newRoute.add(root.val);</span><br><span class="line">            target -= root.val;</span><br><span class="line">            if (0 == target &amp;&amp; null == root.left &amp;&amp; null == root.right) &#123;</span><br><span class="line">                result.add(newRoute);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                findPath(root.left, target, newRoute, result);</span><br><span class="line">                findPath(root.right, target, newRoute, result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.Math;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public int FindGreatestSumOfSubArray(int[] array) &#123;</span><br><span class="line">        int ret = array[0];</span><br><span class="line">        int max = array[0];</span><br><span class="line">        for (int i = 1; i &lt; array.length; i++) &#123;</span><br><span class="line">            max = Math.max(max+array[i], array[i]);</span><br><span class="line">            ret = Math.max(max, ret);</span><br><span class="line">        &#125;</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#二叉树" >
-    <span class="tag-code">二叉树</span>
-  </a>
-
-  <a href="/tags#遍历" >
-    <span class="tag-code">遍历</span>
-  </a>
-
-  <a href="/tags#刷题" >
-    <span class="tag-code">刷题</span>
-  </a>
-
   <a href="/tags#剑指offer" >
     <span class="tag-code">剑指offer</span>
+  </a>
+
+  <a href="/tags#算法" >
+    <span class="tag-code">算法</span>
+  </a>
+
+  <a href="/tags#面试" >
+    <span class="tag-code">面试</span>
+  </a>
+
+  <a href="/tags#数组" >
+    <span class="tag-code">数组</span>
+  </a>
+
+  <a href="/tags#子数组" >
+    <span class="tag-code">子数组</span>
+  </a>
+
+  <a href="/tags#最大" >
+    <span class="tag-code">最大</span>
+  </a>
+
+  <a href="/tags#和" >
+    <span class="tag-code">和</span>
   </a>
 
       </div>
@@ -178,20 +190,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/11/22/个人软件收藏/">
+      <a class="nav-left" href="/2018/11/24/二叉树中和为某一值的路径/">
         <span class="nav-arrow">← </span>
         
-          个人软件收藏
+          二叉树中和为某一值的路径
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/12/03/连续子数组的最大和/">
-        
-          连续子数组的最大和
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -245,7 +250,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/11/24/二叉树中和为某一值的路径/';
+    var url = 'http://yoursite.com/2018/12/03/连续子数组的最大和/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +306,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "二叉树中和为某一值的路径",
+        id: "连续子数组的最大和",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +334,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/11/24/二叉树中和为某一值的路径/';
+  var disqus_url = 'http://yoursite.com/2018/12/03/连续子数组的最大和/';
   
   (function(){
     var dsq = document.createElement('script');
