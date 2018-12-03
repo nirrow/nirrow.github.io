@@ -10,7 +10,7 @@
   
   <title>
     
-      从上往下打印二叉树 | nirrow’s blog
+      二叉搜索树与双向链表 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>从上往下打印二叉树</h2>
-  <p class="post-date">2018-11-02</p>
+  <h2>二叉搜索树与双向链表</h2>
+  <p class="post-date">2018-12-03</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,8 +147,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">/**</span><br><span class="line">public class TreeNode &#123;</span><br><span class="line">    int val = 0;</span><br><span class="line">    TreeNode left = null;</span><br><span class="line">    TreeNode right = null;</span><br><span class="line"></span><br><span class="line">    public TreeNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ArrayList&lt;Integer&gt; PrintFromTopToBottom(TreeNode root) &#123;</span><br><span class="line">        ArrayList&lt;TreeNode&gt; queue = new ArrayList();</span><br><span class="line">        ArrayList&lt;Integer&gt; arrayList = new ArrayList();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        while(!queue.isEmpty()) &#123;</span><br><span class="line">            TreeNode node = queue.remove(0);</span><br><span class="line">            if (null != node) &#123;</span><br><span class="line">                arrayList.add(node.val);</span><br><span class="line">                if (null != node.left)&#123;</span><br><span class="line">                    queue.add(node.left);</span><br><span class="line">                &#125;</span><br><span class="line">                if (null != node.right)&#123;</span><br><span class="line">                    queue.add(node.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return arrayList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">public class TreeNode &#123;</span><br><span class="line">    int val = 0;</span><br><span class="line">    TreeNode left = null;</span><br><span class="line">    TreeNode right = null;</span><br><span class="line"></span><br><span class="line">    public TreeNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    TreeNode cur = null;</span><br><span class="line">    TreeNode head = null;</span><br><span class="line">    public TreeNode Convert(TreeNode pRootOfTree) &#123;</span><br><span class="line">        if (null == pRootOfTree) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            TreeNode prev = null;</span><br><span class="line">            midVisit(pRootOfTree);</span><br><span class="line">            while (null != pRootOfTree.left) &#123;</span><br><span class="line">                pRootOfTree = pRootOfTree.left;</span><br><span class="line">            &#125;</span><br><span class="line">            return pRootOfTree;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private void midVisit(TreeNode next)&#123;</span><br><span class="line">        if (null == next) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        midVisit(next.left);</span><br><span class="line">        if (null == head) &#123;</span><br><span class="line">            cur = next;</span><br><span class="line">            head = next;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            cur.right = next;</span><br><span class="line">            next.left = cur;</span><br><span class="line">            cur = next;</span><br><span class="line">        &#125;</span><br><span class="line">        midVisit(next.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -170,8 +170,12 @@
     <span class="tag-code">二叉树</span>
   </a>
 
-  <a href="/tags#遍历" >
-    <span class="tag-code">遍历</span>
+  <a href="/tags#双向链表" >
+    <span class="tag-code">双向链表</span>
+  </a>
+
+  <a href="/tags#中序遍历" >
+    <span class="tag-code">中序遍历</span>
   </a>
 
       </div>
@@ -182,20 +186,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/11/02/栈的压入、弹出序列/">
+      <a class="nav-left" href="/2018/12/03/连续子数组的最大和/">
         <span class="nav-arrow">← </span>
         
-          栈的压入、弹出序列
+          连续子数组的最大和
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/11/12/数组中出现次数超过一半的数字/">
-        
-          数组中出现次数超过一半的数字
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -249,7 +246,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/11/02/从上往下打印二叉树/';
+    var url = 'http://yoursite.com/2018/12/03/二叉搜索树与双向链表/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -305,7 +302,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "从上往下打印二叉树",
+        id: "二叉搜索树与双向链表",
         owner: "",
         repo: "",
         oauth: {
@@ -333,7 +330,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2018/11/02/从上往下打印二叉树/';
+  var disqus_url = 'http://yoursite.com/2018/12/03/二叉搜索树与双向链表/';
   
   (function(){
     var dsq = document.createElement('script');
