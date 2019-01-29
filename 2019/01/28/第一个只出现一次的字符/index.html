@@ -10,7 +10,7 @@
   
   <title>
     
-      把数组排成最小的数 | nirrow’s blog
+      第一个只出现一次的字符 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>把数组排成最小的数</h2>
-  <p class="post-date">2019-01-11</p>
+  <h2>第一个只出现一次的字符</h2>
+  <p class="post-date">2019-01-28</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,8 +147,9 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.Comparator;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public String PrintMinNumber(int [] numbers) &#123;</span><br><span class="line">        if (null == numbers || numbers.length &lt;= 0) &#123;</span><br><span class="line">            return &quot;&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int length = numbers.length;</span><br><span class="line">            ArrayList&lt;String&gt; aString = new ArrayList&lt;&gt;(length);</span><br><span class="line">            for (int i = 0; i &lt; length; i++) &#123;</span><br><span class="line">                aString.add(String.valueOf(numbers[i]));</span><br><span class="line">            &#125;</span><br><span class="line">            Collections.sort(aString, new Comparator&lt;String&gt;() &#123;</span><br><span class="line"></span><br><span class="line">                @Override</span><br><span class="line">                public int compare(String o1, String o2) &#123;</span><br><span class="line">                    return (o1 + o2).compareTo(o2 + o1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            StringBuffer s = new StringBuffer();</span><br><span class="line">            for (String s1 : aString) &#123;</span><br><span class="line">                s.append(s1);</span><br><span class="line">            &#125;</span><br><span class="line">            return s.toString();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在一个字符串(0&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public int FirstNotRepeatingChar(String str) &#123;</span><br><span class="line">        int length = str.length();</span><br><span class="line">        ArrayList&lt;Character&gt; repeatChars = new ArrayList&lt;&gt;();</span><br><span class="line">        for (int i  = 0; i &lt; length; i++)&#123;</span><br><span class="line">            char c = str.charAt(i);</span><br><span class="line">            if (repeatChars.contains(c)) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            boolean repeate = false;</span><br><span class="line">            for (int j = i+1; j &lt; length; j++)&#123;</span><br><span class="line">                if (c==str.charAt(j)) &#123;</span><br><span class="line">                    repeatChars.add(c);</span><br><span class="line">                    repeate = true;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (!repeate)&#123;</span><br><span class="line">                return i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">// use linkedhashmap to keep the order</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public int FirstNotRepeatingChar(String str) &#123;</span><br><span class="line">        LinkedHashMap &lt;Character, Integer&gt; map = new LinkedHashMap&lt;Character, Integer&gt;();</span><br><span class="line">        for(int i=0;i&lt;str.length();i++)&#123;</span><br><span class="line">            if(map.containsKey(str.charAt(i)))&#123;</span><br><span class="line">                int time = map.get(str.charAt(i));</span><br><span class="line">                map.put(str.charAt(i), ++time);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                map.put(str.charAt(i), 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int pos = -1;  </span><br><span class="line">        for(int i = 0;i&lt;str.length();i++)&#123;</span><br><span class="line">            char c = str.charAt(i);</span><br><span class="line">            if (map.get(c) == 1) &#123;</span><br><span class="line">                return i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return pos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -166,8 +167,12 @@
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#排序" >
-    <span class="tag-code">排序</span>
+  <a href="/tags#遍历" >
+    <span class="tag-code">遍历</span>
+  </a>
+
+  <a href="/tags#查找" >
+    <span class="tag-code">查找</span>
   </a>
 
       </div>
@@ -178,17 +183,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/12/11/从1到n整数中1出现的次数/">
+      <a class="nav-left" href="/2019/01/11/把数组排成最小的数/">
         <span class="nav-arrow">← </span>
         
-          从1到n整数中1出现的次数
+          把数组排成最小的数
         
       </a>
     
     
-      <a class="nav-right" href="/2019/01/28/第一个只出现一次的字符/">
+      <a class="nav-right" href="/2019/01/29/数组中的逆序对/">
         
-          第一个只出现一次的字符
+          数组中的逆序对
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -235,7 +240,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我的解答"><span class="toc-nav-text">我的解答</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我的解答"><span class="toc-nav-text">我的解答</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考答案"><span class="toc-nav-text">参考答案</span></a></li></ol>
     
   </div>
 </aside>
@@ -245,7 +250,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/01/11/把数组排成最小的数/';
+    var url = 'http://yoursite.com/2019/01/28/第一个只出现一次的字符/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +306,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "把数组排成最小的数",
+        id: "第一个只出现一次的字符",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +334,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2019/01/11/把数组排成最小的数/';
+  var disqus_url = 'http://yoursite.com/2019/01/28/第一个只出现一次的字符/';
   
   (function(){
     var dsq = document.createElement('script');

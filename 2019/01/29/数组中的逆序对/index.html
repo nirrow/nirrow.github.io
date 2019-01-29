@@ -10,7 +10,7 @@
   
   <title>
     
-      把数组排成最小的数 | nirrow’s blog
+      数组中的逆序对 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>把数组排成最小的数</h2>
-  <p class="post-date">2019-01-11</p>
+  <h2>数组中的逆序对</h2>
+  <p class="post-date">2019-01-29</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,8 +147,15 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.Comparator;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public String PrintMinNumber(int [] numbers) &#123;</span><br><span class="line">        if (null == numbers || numbers.length &lt;= 0) &#123;</span><br><span class="line">            return &quot;&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int length = numbers.length;</span><br><span class="line">            ArrayList&lt;String&gt; aString = new ArrayList&lt;&gt;(length);</span><br><span class="line">            for (int i = 0; i &lt; length; i++) &#123;</span><br><span class="line">                aString.add(String.valueOf(numbers[i]));</span><br><span class="line">            &#125;</span><br><span class="line">            Collections.sort(aString, new Comparator&lt;String&gt;() &#123;</span><br><span class="line"></span><br><span class="line">                @Override</span><br><span class="line">                public int compare(String o1, String o2) &#123;</span><br><span class="line">                    return (o1 + o2).compareTo(o2 + o1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            StringBuffer s = new StringBuffer();</span><br><span class="line">            for (String s1 : aString) &#123;</span><br><span class="line">                s.append(s1);</span><br><span class="line">            &#125;</span><br><span class="line">            return s.toString();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007<br>输入描述:  </p>
+<blockquote>
+<p>题目保证输入的数组中没有的相同的数字<br>数据范围：</p>
+<blockquote>
+<p>对于%50的数据,size&lt;=10^4<br>对于%75的数据,size&lt;=10^5<br>对于%100的数据,size&lt;=2*10^5</p>
+</blockquote>
+</blockquote>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><p>时间复杂度较高，没有通过测试，但是不会改变原有的数据顺序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int InversePairs(int [] array) &#123;</span><br><span class="line">        if (null == array) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int length = array.length;</span><br><span class="line">        if (length &lt; 2) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] copy = new int[length];</span><br><span class="line">        int cnt = 0;</span><br><span class="line">        System.arraycopy(array, 0, copy, 0, length);</span><br><span class="line">        for (int i = 1; i &lt; length; i++) &#123;</span><br><span class="line">            if (copy[i] &lt; copy[i - 1]) &#123;</span><br><span class="line">                //逆序，通过交换位置，调整成顺序。</span><br><span class="line">                for (int j = i; j &gt; 0; j--) &#123;</span><br><span class="line">                    if (copy[j] &lt; copy[j - 1]) &#123;</span><br><span class="line">                        int tmp = copy[j];</span><br><span class="line">                        copy[j] = copy[j - 1];</span><br><span class="line">                        copy[j - 1] = tmp;</span><br><span class="line">                        cnt++;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return cnt % 1000000007;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int InversePairs(int [] array) &#123;</span><br><span class="line">        if (null == array) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int length = array.length;</span><br><span class="line">        if (length &lt; 2) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] copy = new int[length];</span><br><span class="line">        System.arraycopy(array, 0, copy, 0, length);</span><br><span class="line">        return inversePairsCore(array, copy, 0, length - 1);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private int inversePairsCore(int[] org, int[] copy, int start, int end) &#123;</span><br><span class="line">        if (start == end) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int mid = start + (end - start) / 2;</span><br><span class="line">        //点睛之笔，交换org和copy的参数位置</span><br><span class="line">        int left = inversePairsCore(copy, org, start, mid);</span><br><span class="line">        int right = inversePairsCore(copy, org, mid + 1, end);</span><br><span class="line"></span><br><span class="line">        int leftEnd = mid;</span><br><span class="line">        int rightEnd = end;</span><br><span class="line">        int copyLength = end;</span><br><span class="line">        long res = 0;</span><br><span class="line"></span><br><span class="line">        while (leftEnd &gt;= start &amp;&amp; rightEnd &gt;= mid + 1) &#123;</span><br><span class="line">            if (org[leftEnd] &gt; org[rightEnd]) &#123;//发现逆序</span><br><span class="line">                copy[copyLength--] = org[leftEnd--];</span><br><span class="line">                //左边最后一个数比右边最后一个数还大，那么，左边最后一个数，比右边所有数都大。</span><br><span class="line">                res += rightEnd - mid;</span><br><span class="line">            &#125; else &#123;//顺序不需要计入总数，只要rightEnd--，表示最后一个已经处理过即可。</span><br><span class="line">                copy[copyLength--] = org[rightEnd--];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //左边或右边，有一边肯定有没有进入copy数组的数，现在让他们进来。</span><br><span class="line">        while (leftEnd &gt;= start) &#123;</span><br><span class="line">            copy[copyLength--] = org[leftEnd--];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (rightEnd &gt;= mid + 1) &#123;</span><br><span class="line">            copy[copyLength--] = org[rightEnd--];</span><br><span class="line">        &#125;</span><br><span class="line">        return (int) ((left + right + res) % 1000000007);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -158,16 +165,12 @@
     <span class="tag-code">算法</span>
   </a>
 
-  <a href="/tags#面试" >
-    <span class="tag-code">面试</span>
+  <a href="/tags#剑指Offer" >
+    <span class="tag-code">剑指Offer</span>
   </a>
 
-  <a href="/tags#剑指offer" >
-    <span class="tag-code">剑指offer</span>
-  </a>
-
-  <a href="/tags#排序" >
-    <span class="tag-code">排序</span>
+  <a href="/tags#归并排序" >
+    <span class="tag-code">归并排序</span>
   </a>
 
       </div>
@@ -178,20 +181,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/12/11/从1到n整数中1出现的次数/">
+      <a class="nav-left" href="/2019/01/28/第一个只出现一次的字符/">
         <span class="nav-arrow">← </span>
-        
-          从1到n整数中1出现的次数
-        
-      </a>
-    
-    
-      <a class="nav-right" href="/2019/01/28/第一个只出现一次的字符/">
         
           第一个只出现一次的字符
         
-        <span class="nav-arrow"> →</span>
       </a>
+    
     
   </div>
 
@@ -235,7 +231,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我的解答"><span class="toc-nav-text">我的解答</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我的解答"><span class="toc-nav-text">我的解答</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考答案"><span class="toc-nav-text">参考答案</span></a></li></ol>
     
   </div>
 </aside>
@@ -245,7 +241,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/01/11/把数组排成最小的数/';
+    var url = 'http://yoursite.com/2019/01/29/数组中的逆序对/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +297,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "把数组排成最小的数",
+        id: "数组中的逆序对",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +325,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2019/01/11/把数组排成最小的数/';
+  var disqus_url = 'http://yoursite.com/2019/01/29/数组中的逆序对/';
   
   (function(){
     var dsq = document.createElement('script');
