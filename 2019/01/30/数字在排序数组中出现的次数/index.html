@@ -10,7 +10,7 @@
   
   <title>
     
-      两个链表的第一个公共结点 | nirrow’s blog
+      数字在排序数组中出现的次数 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>两个链表的第一个公共结点</h2>
+  <h2>数字在排序数组中出现的次数</h2>
   <p class="post-date">2019-01-30</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -147,8 +147,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个链表，找出它们的第一个公共结点。(补充：题目中没有说明两个链表呈“Y”字型，即两个链表有公共的尾部。<br>我曾在一次面试中遇到这个问题，当时的答案是用栈将两个链表装起来，然后一个一个出栈并对比。现在看来，与下面的<br>答案相比，事件复杂度虽然一致，但空间复杂度O(n)确实比下面的O(1)要差。)</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">public class ListNode &#123;</span><br><span class="line">    int val;</span><br><span class="line">    ListNode next = null;</span><br><span class="line"></span><br><span class="line">    ListNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) &#123;</span><br><span class="line">        ListNode tmp1 = pHead1, tmp2 = pHead2;</span><br><span class="line">        int size1 = sizeofList(tmp1);</span><br><span class="line">        int size2 = sizeofList(tmp2);</span><br><span class="line">        tmp1 = pHead1;</span><br><span class="line">        tmp2 = pHead2;</span><br><span class="line">        if (size1 &gt; size2) &#123;</span><br><span class="line">            for (int i = 0; i &lt; size1 - size2; i++) &#123;</span><br><span class="line">                tmp1 = tmp1.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else if (size2 &gt; size1) &#123;</span><br><span class="line">            for (int i = 0; i &lt; size2 - size1; i++) &#123;</span><br><span class="line">                tmp2 = tmp2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while (null != tmp1 &amp;&amp; null != tmp2)&#123;</span><br><span class="line">            //注意这里的“==”</span><br><span class="line">            if (tmp1 == tmp2) &#123;</span><br><span class="line">                return tmp1;</span><br><span class="line">            &#125;</span><br><span class="line">            tmp1 = tmp1.next;</span><br><span class="line">            tmp2 = tmp2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private int sizeofList(ListNode head)&#123;</span><br><span class="line">        int size = 0;</span><br><span class="line">        while(null != head) &#123;</span><br><span class="line">            size++;</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>统计一个数字在排序数组中出现的次数。</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int GetNumberOfK(int [] array , int k) &#123;</span><br><span class="line">        //因为题目声明数组是排序的，所以可以用归并法。</span><br><span class="line">        //先做异常情况的处理。</span><br><span class="line">        if (null == array) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int length = array.length;</span><br><span class="line">        if (0 == length) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        //确定数组是升序的还是降序的。</span><br><span class="line">        if (array[0] &gt; array[length - 1]) &#123;//降序</span><br><span class="line">            return getNumOfKInDecArray(array, k, 0, length -1);</span><br><span class="line">        &#125; else if (array[0] &lt; array[length - 1]) &#123;//升序</span><br><span class="line">            return getNumOfKInIncArray(array, k, 0, length -1);</span><br><span class="line">        &#125; else &#123;//所有成员相等，叫平序？</span><br><span class="line">            return array[0] == k ? length : 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private int getNumOfKInDecArray(int[] array, int k, int start, int end) &#123;</span><br><span class="line">        if (array[start] &lt; k) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else if (array[end] &gt; k) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else if (array[start] == k &amp;&amp; array[end] == k) &#123;</span><br><span class="line">            return end -start + 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int mid = (start + end) &gt;&gt; 1;</span><br><span class="line">            int leftNum = getNumOfKInDecArray(array, k, start, mid);</span><br><span class="line">            int rightNum = getNumOfKInDecArray(array, k, mid + 1, end);</span><br><span class="line">            return leftNum + rightNum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private int getNumOfKInIncArray(int[] array, int k, int start, int end) &#123;</span><br><span class="line">        if (array[start] &gt; k) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else if (array[end] &lt; k) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else if (array[start] == k &amp;&amp; array[end] == k) &#123;</span><br><span class="line">            return end -start + 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int mid = (start + end) &gt;&gt; 1;</span><br><span class="line">            int leftNum = getNumOfKInIncArray(array, k, start, mid);</span><br><span class="line">            int rightNum = getNumOfKInIncArray(array, k, mid + 1, end);</span><br><span class="line">            return leftNum + rightNum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -166,8 +166,8 @@
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#链表" >
-    <span class="tag-code">链表</span>
+  <a href="/tags#归并" >
+    <span class="tag-code">归并</span>
   </a>
 
       </div>
@@ -178,20 +178,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/01/29/数组中的逆序对/">
+      <a class="nav-left" href="/2019/01/30/两个链表的第一个公共结点/">
         <span class="nav-arrow">← </span>
         
-          数组中的逆序对
+          两个链表的第一个公共结点
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/01/30/数字在排序数组中出现的次数/">
-        
-          数字在排序数组中出现的次数
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -245,7 +238,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/01/30/两个链表的第一个公共结点/';
+    var url = 'http://yoursite.com/2019/01/30/数字在排序数组中出现的次数/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +294,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "两个链表的第一个公共结点",
+        id: "数字在排序数组中出现的次数",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +322,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2019/01/30/两个链表的第一个公共结点/';
+  var disqus_url = 'http://yoursite.com/2019/01/30/数字在排序数组中出现的次数/';
   
   (function(){
     var dsq = document.createElement('script');
