@@ -10,7 +10,7 @@
   
   <title>
     
-      二叉树的深度 | nirrow’s blog
+      平衡二叉树 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>二叉树的深度</h2>
-  <p class="post-date">2019-01-30</p>
+  <h2>平衡二叉树</h2>
+  <p class="post-date">2019-01-31</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,8 +147,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">public class TreeNode &#123;</span><br><span class="line">    int val = 0;</span><br><span class="line">    TreeNode left = null;</span><br><span class="line">    TreeNode right = null;</span><br><span class="line"></span><br><span class="line">    public TreeNode(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public int TreeDepth(TreeNode root) &#123;</span><br><span class="line">        if (null == root) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int leftDepth = TreeDepth(root.left);</span><br><span class="line">            int rightDepth = TreeDepth(root.right);</span><br><span class="line">            return (leftDepth &gt; rightDepth ? leftDepth : rightDepth) + 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
+<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public boolean IsBalanced_Solution(TreeNode root) &#123;</span><br><span class="line">        return getDepth(root) != -1;</span><br><span class="line">    &#125;</span><br><span class="line">    //用-1表示非平衡二叉树，只要发现，就停止迭代。</span><br><span class="line">    private int getDepth(TreeNode root) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int left = getDepth(root.left);</span><br><span class="line">        if (left == -1) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int right = getDepth(root.right);</span><br><span class="line">        if (right == -1) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return Math.abs(left - right) &gt; 1 ? -1 : 1 + Math.max(left, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -158,20 +158,16 @@
     <span class="tag-code">算法</span>
   </a>
 
-  <a href="/tags#面试" >
-    <span class="tag-code">面试</span>
-  </a>
-
   <a href="/tags#剑指offer" >
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#二叉树" >
-    <span class="tag-code">二叉树</span>
+  <a href="/tags#笔试" >
+    <span class="tag-code">笔试</span>
   </a>
 
-  <a href="/tags#树的深度" >
-    <span class="tag-code">树的深度</span>
+  <a href="/tags#平衡二叉树" >
+    <span class="tag-code">平衡二叉树</span>
   </a>
 
       </div>
@@ -182,20 +178,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/01/30/数字在排序数组中出现的次数/">
+      <a class="nav-left" href="/2019/01/30/二叉树的深度/">
         <span class="nav-arrow">← </span>
         
-          数字在排序数组中出现的次数
+          二叉树的深度
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/01/31/平衡二叉树/">
-        
-          平衡二叉树
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -239,7 +228,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我的解答"><span class="toc-nav-text">我的解答</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考答案"><span class="toc-nav-text">参考答案</span></a></li></ol>
     
   </div>
 </aside>
@@ -249,7 +238,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/01/30/二叉树的深度/';
+    var url = 'http://yoursite.com/2019/01/31/平衡二叉树/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -305,7 +294,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "二叉树的深度",
+        id: "平衡二叉树",
         owner: "",
         repo: "",
         oauth: {
@@ -333,7 +322,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2019/01/30/二叉树的深度/';
+  var disqus_url = 'http://yoursite.com/2019/01/31/平衡二叉树/';
   
   (function(){
     var dsq = document.createElement('script');
