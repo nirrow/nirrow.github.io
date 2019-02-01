@@ -10,7 +10,7 @@
   
   <title>
     
-      平衡二叉树 | nirrow’s blog
+      数组中只出现一次的数字 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>平衡二叉树</h2>
-  <p class="post-date">2019-01-31</p>
+  <h2>数组中只出现一次的数字</h2>
+  <p class="post-date">2019-02-01</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,8 +147,9 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
-<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public boolean IsBalanced_Solution(TreeNode root) &#123;</span><br><span class="line">        return getDepth(root) != -1;</span><br><span class="line">    &#125;</span><br><span class="line">    //用-1表示非平衡二叉树，只要发现，就停止迭代。</span><br><span class="line">    private int getDepth(TreeNode root) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int left = getDepth(root.left);</span><br><span class="line">        if (left == -1) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int right = getDepth(root.right);</span><br><span class="line">        if (right == -1) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return Math.abs(left - right) &gt; 1 ? -1 : 1 + Math.max(left, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>一个整型数组里除了两个数字之外，其他的数字都出现了偶数次。请写程序找出这两个只出现一次的数字。</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//num1,num2分别为长度为1的数组。传出参数</span><br><span class="line">//将num1[0],num2[0]设置为返回结果</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Set;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) &#123;</span><br><span class="line">        if (null == array) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        int length = array.length;</span><br><span class="line">        if (1 == length) &#123;</span><br><span class="line">            num1[0] = array[0];</span><br><span class="line">        &#125; else if (2 == length) &#123;</span><br><span class="line">            if (array[0] != array[1]) &#123;</span><br><span class="line">                num1[0] = array[0];</span><br><span class="line">                num2[0] = array[1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            HashMap&lt;Integer, Integer&gt; hashMap = new HashMap&lt;&gt;();</span><br><span class="line">            for (Integer key : array) &#123;</span><br><span class="line">                if (hashMap.containsKey(key)) &#123;</span><br><span class="line">                    Integer value = hashMap.remove(key);</span><br><span class="line">                    value = value * -1;</span><br><span class="line">                    hashMap.put(key, value);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    hashMap.put(key, 1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            Set&lt;Integer&gt; keySet = hashMap.keySet();</span><br><span class="line">            int cnt = 0;</span><br><span class="line">            for (Integer key : keySet) &#123;</span><br><span class="line">                int value = hashMap.get(key);</span><br><span class="line">                if (1 == value) &#123;</span><br><span class="line">                    if (0 == cnt) &#123;</span><br><span class="line">                        num1[0] = key;</span><br><span class="line">                        cnt++;</span><br><span class="line">                    &#125; else if (1 == cnt) &#123;</span><br><span class="line">                        num2[0] = key;</span><br><span class="line">                        cnt++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (2 == cnt) &#123;</span><br><span class="line">                        return;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//num1,num2分别为长度为1的数组。传出参数</span><br><span class="line">//将num1[0],num2[0]设置为返回结果</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) &#123;</span><br><span class="line">        if (null == array) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        int length = array.length;</span><br><span class="line">        if(2 &gt; length)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        int x = 0;</span><br><span class="line">        for(int i : array) &#123;</span><br><span class="line">            x ^= i;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i : array) &#123;</span><br><span class="line">            if((i&amp;x) != 0) &#123;</span><br><span class="line">                num1[0] ^= i;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                num2[0] ^= i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -158,16 +159,16 @@
     <span class="tag-code">算法</span>
   </a>
 
+  <a href="/tags#面试" >
+    <span class="tag-code">面试</span>
+  </a>
+
   <a href="/tags#剑指offer" >
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#笔试" >
-    <span class="tag-code">笔试</span>
-  </a>
-
-  <a href="/tags#平衡二叉树" >
-    <span class="tag-code">平衡二叉树</span>
+  <a href="/tags#查找" >
+    <span class="tag-code">查找</span>
   </a>
 
       </div>
@@ -178,20 +179,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/01/30/二叉树的深度/">
+      <a class="nav-left" href="/2019/01/31/平衡二叉树/">
         <span class="nav-arrow">← </span>
         
-          二叉树的深度
+          平衡二叉树
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/02/01/数组中只出现一次的数字/">
-        
-          数组中只出现一次的数字
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -235,7 +229,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考答案"><span class="toc-nav-text">参考答案</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我的解答"><span class="toc-nav-text">我的解答</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考答案"><span class="toc-nav-text">参考答案</span></a></li></ol>
     
   </div>
 </aside>
@@ -245,7 +239,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/01/31/平衡二叉树/';
+    var url = 'http://yoursite.com/2019/02/01/数组中只出现一次的数字/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +295,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "平衡二叉树",
+        id: "数组中只出现一次的数字",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +323,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2019/01/31/平衡二叉树/';
+  var disqus_url = 'http://yoursite.com/2019/02/01/数组中只出现一次的数字/';
   
   (function(){
     var dsq = document.createElement('script');
