@@ -10,7 +10,7 @@
   
   <title>
     
-      翻转单词顺序列 | nirrow’s blog
+      孩子们的游戏 | nirrow’s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>翻转单词顺序列</h2>
-  <p class="post-date">2019-02-02</p>
+  <h2>孩子们的游戏</h2>
+  <p class="post-date">2019-02-12</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,27 +147,45 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？</p>
-<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public String ReverseSentence(String str) &#123;</span><br><span class="line">        char[] chars = str.toCharArray();</span><br><span class="line">        reverse(chars,0,chars.length - 1);</span><br><span class="line">        int blank = -1;</span><br><span class="line">        for(int i = 0;i &lt; chars.length;i++)&#123;</span><br><span class="line">            if(chars[i] == &apos; &apos;)&#123; </span><br><span class="line">                int nextBlank = i;</span><br><span class="line">                reverse(chars,blank + 1,nextBlank - 1);</span><br><span class="line">                blank = nextBlank;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        reverse(chars,blank + 1,chars.length - 1);//最后一个单词单独进行反转</span><br><span class="line">        return new String(chars);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">    public void reverse(char[] chars,int low,int high)&#123;</span><br><span class="line">        while(low &lt; high)&#123;</span><br><span class="line">            char temp = chars[low];</span><br><span class="line">            chars[low] = chars[high];</span><br><span class="line">            chars[high] = temp;</span><br><span class="line">            low++;</span><br><span class="line">            high--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
+    <section class="markdown-content"><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>每年六一儿童节,牛客都会准备一些小礼物去看望孤儿院的小朋友,今年亦是如此。HF作为牛客的资深元老,自然也准备了一些小游戏。其中,有个游戏是这样的:首先,让小朋友们围成一个大圈。然后,他随机指定一个数m,让编号为0的小朋友开始报数。每次喊到m-1的那个小朋友要出列唱首歌,然后可以在礼品箱中任意的挑选礼物,并且不再回到圈中,从他的下一个小朋友开始,继续0…m-1报数….这样下去….直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)</p>
+<h2 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h2><pre><code class="[java]">public class Solution {
+    public int LastRemaining_Solution(int n, int m) {
+        if (0 == m) {
+            return -1;
+        }
+        int i, r = 0;
+        for (i = 2; i &lt;= n; i++) {
+            r = (r + m) % i;
+        }
+        return r;
+    }
+}
+</code></pre>
+<h2 id="推理过程"><a href="#推理过程" class="headerlink" title="推理过程"></a>推理过程</h2><p>反着推。最后剩下的那个人，我们先不管他最初的编号是多少，但是我们一定知道，最后只剩下他时，他在这个只有他一个人的<br>环中的编号是0。OK，现在往回返一步，也就是只剩两个人的时候。两个人中，他剩下了，另一个被淘汰了，那么他的编号应该是<br>m%2。这样，他在剩两个人的时候的编号就有了，一步一步推回去，就推到了最初的状态，也就得到了他最初的编号。</p>
+</section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#算法" >
-    <span class="tag-code">算法</span>
-  </a>
-
-  <a href="/tags#面试" >
-    <span class="tag-code">面试</span>
-  </a>
-
   <a href="/tags#剑指offer" >
     <span class="tag-code">剑指offer</span>
   </a>
 
-  <a href="/tags#翻转" >
-    <span class="tag-code">翻转</span>
+  <a href="/tags#刷题" >
+    <span class="tag-code">刷题</span>
+  </a>
+
+  <a href="/tags#笔试" >
+    <span class="tag-code">笔试</span>
+  </a>
+
+  <a href="/tags#约瑟夫环" >
+    <span class="tag-code">约瑟夫环</span>
+  </a>
+
+  <a href="/tags#Josephus" >
+    <span class="tag-code">Josephus</span>
   </a>
 
       </div>
@@ -178,20 +196,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/02/02/左旋转字符串/">
+      <a class="nav-left" href="/2019/02/02/翻转单词顺序列/">
         <span class="nav-arrow">← </span>
         
-          左旋转字符串
+          翻转单词顺序列
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/02/12/孩子们的游戏/">
-        
-          孩子们的游戏
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -235,7 +246,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我的解答"><span class="toc-nav-text">我的解答</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我的解答"><span class="toc-nav-text">我的解答</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#推理过程"><span class="toc-nav-text">推理过程</span></a></li></ol>
     
   </div>
 </aside>
@@ -245,7 +256,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/02/02/翻转单词顺序列/';
+    var url = 'http://yoursite.com/2019/02/12/孩子们的游戏/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -301,7 +312,7 @@
     var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "翻转单词顺序列",
+        id: "孩子们的游戏",
         owner: "",
         repo: "",
         oauth: {
@@ -329,7 +340,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://yoursite.com/2019/02/02/翻转单词顺序列/';
+  var disqus_url = 'http://yoursite.com/2019/02/12/孩子们的游戏/';
   
   (function(){
     var dsq = document.createElement('script');
